@@ -2,8 +2,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext_lazy as tr
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
+from django.views import View
 # from django.urls import reverse_lazy
 from django.contrib import messages
+from task_manager.users.models import NewUser
 from . import forms
 
 
@@ -23,7 +25,7 @@ class UserLoginView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         context = {}
-        form = forms.LoginUserForm()(request.POST)
+        form = forms.LoginUserForm(request.POST)
 
         if form.is_valid():
             username = request.POST['username']
@@ -40,3 +42,23 @@ class UserLoginView(TemplateView):
         )
         context['login_form'] = form
         return render(request, 'login.html', context)
+
+
+class UserLogoutView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        messages.info(request, tr('Вы разлогинены'))
+        logout(request)
+        return redirect('home')
+    
+
+class UsersListView(View):
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            template_name='users.html',
+            context={
+                'users': NewUser.objects.all().order_by('id'),
+                'title': 'Users'
+            }
+        )
