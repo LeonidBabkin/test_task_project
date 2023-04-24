@@ -6,12 +6,12 @@ from django import forms
 
 class CreateUserForm(UserCreationForm):
     first_name = forms.CharField(label=tr('Имя'),
-                                label_suffix='',
-                                max_length=100,
-                                required=True,
-                                widget=forms.TextInput(
-                                    attrs={'placeholder': tr('Имя'),
-                                          'class': 'form-control', }))
+                                 label_suffix='',
+                                 max_length=100,
+                                 required=True,
+                                 widget=forms.TextInput(
+                                     attrs={'placeholder': tr('Имя'),
+                                            'class': 'form-control', }))
     last_name = forms.CharField(label=tr('Фамилия'),
                                 label_suffix='',
                                 max_length=100,
@@ -20,17 +20,17 @@ class CreateUserForm(UserCreationForm):
                                     attrs={'placeholder': tr('Фамилия'),
                                            'class': 'form-control', }))
     username = forms.CharField(label=tr('Имя пользователя'),
-                                max_length=20,
-                                label_suffix='',
-                                required=True,
-                                help_text=tr('Обязательное поле. '
+                               max_length=20,
+                               label_suffix='',
+                               required=True,
+                               help_text=tr('Обязательное поле. '
                                             'Не более 150 символов. '
                                             'Только буквы, цифры и символы @/./+/-/_.'),
-                                widget=forms.TextInput(
+                               widget=forms.TextInput(
                                     attrs={'placeholder': tr('Имя пользователя'),
                                            'autofocus': True,
                                            'class': 'form-control', }),
-                                error_messages={'unique': tr(
+                               error_messages={'unique': tr(
                                                 'Пользователь с таким именем '
                                                 'уже есть')})
     password1 = forms.CharField(label=tr('Пароль'),
@@ -48,11 +48,11 @@ class CreateUserForm(UserCreationForm):
                                 max_length=100,
                                 required=True,
                                 help_text=tr("Для подтверждения введите,"
-                                            " пожалуйста, пароль ещё раз."),
+                                             " пожалуйста, пароль ещё раз."),
                                 widget=forms.PasswordInput(
                                     attrs={
                                         'placeholder': tr('Подтверждение '
-                                                         'пароля'),
+                                                          'пароля'),
                                         'class': 'form-control', }))
 
     class Meta:
@@ -98,11 +98,11 @@ class UpdateUserForm(UserCreationForm):
                                 label_suffix='',
                                 max_length=100,
                                 help_text=tr("Для подтверждения введите,"
-                                            " пожалуйста, пароль ещё раз."),
+                                             " пожалуйста, пароль ещё раз."),
                                 widget=forms.PasswordInput(
                                     attrs={
                                         'placeholder': tr('Подтверждение '
-                                                         'пароля'),
+                                                          'пароля'),
                                         'class': 'form-control', }))
 
     class Meta:

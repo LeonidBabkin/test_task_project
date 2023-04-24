@@ -9,7 +9,6 @@ from task_manager.users.models import NewUser
 from . import forms
 
 
-
 class Index(TemplateView):
 
     template_name = 'index.html'
@@ -50,9 +49,10 @@ class UserLogoutView(TemplateView):
         messages.info(request, tr('Вы разлогинены'))
         logout(request)
         return redirect('home')
-    
+
 
 class UsersListView(View):
+
     def get(self, request, *args, **kwargs):
         return render(
             request,

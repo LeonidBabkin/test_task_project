@@ -8,7 +8,6 @@ from django.views import View
 from . import forms
 
 
-
 class Index(TemplateView):
 
     template_name = 'index.html'
@@ -27,14 +26,9 @@ class UserRegisterView(View):
         if form.is_valid():  # Если данные корректные, то сохраняем данные формы
             form.save()
             messages.success(request, "Пользователь зарегистрирован")
-            
+
             # переделать redirect позже на login
             return redirect(reverse_lazy('login'))  # Редирект на указанный маршрут
-        # Если данные некоректные, то возвращем человека обратно на страницу с заполенной формой регистрации
         messages.error(request, 'Ошибка в регистрации. Попробуйте снова')
         context['registration_form'] = form
         return render(request, 'users/register.html', context)
-    
-
-
-
