@@ -36,10 +36,12 @@ class UserLoginView(TemplateView):
                 messages.info(request, tr('Вы залогинены'))
                 return redirect('home')
         messages.error(request, tr(
-            'Пожалуйста, введите правильные имя пользователя и пароль.'
+            'Пожалуйста, введите правильные имя пользователя и пароль. '
             'Оба поля могут быть чувствительны к регистру.')
         )
+
         context['login_form'] = form
+        # print(context['login_form']['password'].errors)
         return render(request, 'login.html', context)
 
 
