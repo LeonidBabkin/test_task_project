@@ -83,7 +83,7 @@ DB_PORT = parsed_url.port
 DB_NAME = parsed_url.path[1:]
 DB_USER = parsed_url.username
 DB_PASS = parsed_url.password
-print('DB_HOST:', DB_HOST, 'DB_PORT:', DB_PORT, 'DB_NAME:', DB_NAME, 'DB_USER:', DB_USER, 'DB_PASS:', DB_PASS)
+# print('DB_HOST:', DB_HOST, 'DB_PORT:', DB_PORT, 'DB_NAME:', DB_NAME, 'DB_USER:', DB_USER, 'DB_PASS:', DB_PASS)
 
 DATABASES = {
     'default': {
