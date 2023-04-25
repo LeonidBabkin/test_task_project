@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from urllib.parse import urlparse
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -76,12 +77,26 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+parsed_url = urlparse(os.environ.get('DATABASE_URL'))
+DB_HOST = parsed_url.hostname
+DB_PORT = parsed_url.port
+DB_NAME = parsed_url.path[1:]
+DB_USER = parsed_url.username
+DB_PASS = parsed_url.password
+print('DB_HOST:', DB_HOST, 'DB_PORT:', DB_PORT, 'DB_NAME:', DB_NAME, 'DB_USER:', DB_USER, 'DB_PASS:', DB_PASS)
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': BASE_DIR / DB_NAME ,
+        'NAME': DB_NAME,
+        'USER': DB_USER ,
+        'PASSWORD': DB_PASS,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
+
 
 
 # Password validation
