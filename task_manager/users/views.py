@@ -15,6 +15,7 @@ class Index(TemplateView):
 
 
 class UserRegisterView(View):
+
     def get(self, request, *args, **kwargs):
         context = {}
         form = forms.CreateUserForm()

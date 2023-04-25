@@ -22,7 +22,6 @@ from . import views
 urlpatterns = [
     path('', views.Index.as_view(), name='home'),
     path('admin/', admin.site.urls),
-    path('create/', include('task_manager.users.urls')),
     path('login/', views.UserLoginView.as_view(), name='login'),
     path('logout/', views.UserLogoutView.as_view(), name='logout'),
     path('users/', views.UsersListView.as_view(), name='users'),
