@@ -10,4 +10,5 @@ class NewUser(AbstractUser):
     age = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.username
+        return f'{self.last_name}, {self.first_name}'
+

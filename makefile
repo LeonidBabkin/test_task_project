@@ -25,4 +25,11 @@ start:
 lint:
 	poetry run flake8
 
-.PHONY: start, lint, migrate, shell, shellplus, validatetemplates, showurls, dev, reinstall, lint
+test:
+	poetry run python3 manage.py test
+testcov:
+	poetry run pytest --cov
+coverage:
+	poetry run coverage run manage.py test task_manager
+	
+.PHONY: start, lint, migrate, shell, shellplus, validatetemplates, showurls, dev, reinstall, lint, test, testcov

@@ -9,15 +9,29 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+# import django
+# django.setup()
+from django.utils.translation import gettext_lazy as tr
 from pathlib import Path
 from urllib.parse import urlparse
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'task_manager.settings'
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "task_manager.settings")
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+parsed_url = urlparse(os.environ.get('DATABASE_URL'))
+DB_HOST = parsed_url.hostname
+DB_PORT = parsed_url.port
+DB_NAME = parsed_url.path[1:]
+DB_USER = parsed_url.username
+DB_PASS = parsed_url.password
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -25,7 +39,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', False)
-ALLOWED_HOSTS = ['*', 'webserver', 'localhost', '27.0.0.1']
+ALLOWED_HOSTS = ['*', 'webserver', 'localhost', '27.0.0.1', DB_HOST]
 
 
 # Application definition
@@ -76,13 +90,6 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-parsed_url = urlparse(os.environ.get('DATABASE_URL'))
-DB_HOST = parsed_url.hostname
-DB_PORT = parsed_url.port
-DB_NAME = parsed_url.path[1:]
-DB_USER = parsed_url.username
-DB_PASS = parsed_url.password
 
 
 DATABASES = {
@@ -140,3 +147,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.NewUser'
+
+
+LANGUAGES = (
+    ('en-us', tr('English')),
+    ('ru', tr('Russian')),
+)
