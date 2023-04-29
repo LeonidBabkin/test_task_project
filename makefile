@@ -27,9 +27,8 @@ lint:
 
 test:
 	poetry run python3 manage.py test
-testcov:
-	poetry run pytest --cov
+cov:
+	poetry run pytest --cov=task_manager
 coverage:
 	poetry run coverage run manage.py test task_manager
-	
 .PHONY: start, lint, migrate, shell, shellplus, validatetemplates, showurls, dev, reinstall, lint, test, testcov

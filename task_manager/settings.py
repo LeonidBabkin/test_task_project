@@ -9,20 +9,18 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-# import django
-# django.setup()
-from django.utils.translation import gettext_lazy as tr
-from pathlib import Path
-from urllib.parse import urlparse
 import os
+from pathlib import Path
 from dotenv import load_dotenv
+from urllib.parse import urlparse
+from django.utils.translation import gettext_lazy as tr
 load_dotenv()
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'task_manager.settings'
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "task_manager.settings")
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
 
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "task_manager.settings")
+# from django.core.wsgi import get_wsgi_application
+# application = get_wsgi_application()
+# os.environ['DJANGO_ALLOW_ASYNC_UNSAFE']= 'true'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,10 +35,10 @@ DB_PASS = parsed_url.password
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production
-SECRET_KEY = os.getenv('SECRET_KEY')
+
 DEBUG = os.getenv('DEBUG', False)
 ALLOWED_HOSTS = ['*', 'webserver', 'localhost', '27.0.0.1', DB_HOST]
-
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Application definition
 
@@ -53,8 +51,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'task_manager',
     'task_manager.users',
+    'task_manager.statuses',
+    'task_manager.tasks',
     'bootstrap4',
     'bootstrapform',
+    # 'users.apps.UsersConfig',
+    # 'pytest',
+    # 'flake8',
+    # 'psycopg2-binary',
+    # 'whitenoise',
+    # 'pytest-cov',
+    # 'beautifulsoup4',
+    # 'gunicorn',
+    # 'python-dotenv',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +100,7 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+LOGIN_URL = 'login'
 
 DATABASES = {
     'default': {
