@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+{% block content %}
+  <div class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% translate 'Задачи' %}</h1>
+    <a class="nav-link" href="{% url 'task_create' %}">{% translate 'Создать задачу' %}</a>
+    <div class="card mb-3">
+        <div class="card-body bg-light">
+            <form method="get" class="form-check">
+             {% if form %}
+              {% bootstrap_form form %}
+             {% endif %}
+                </div>                
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="Показать" />
+                  </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>
+            {% translate 'Имя' %}
+          </th>
+          <th>
+            {% translate 'Статус' %}
+          </th>
+          <th>
+            {% translate 'Автор' %}
+          </th>
+          <th>
+            {% translate 'Исполнитель' %}
+          </th>
+          <th>
+            {% translate 'Дата создания' %}
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if tasks %}
+        {% for task in tasks %}
+          <tr>
+            <td>{{ task.id }}</td>
+            <td>
+              <a href="{{ task.id }}/">{{ task.name }}</a>
+            </td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.author }}</td>
+            <td>{{ task.executor }}</td>
+            <td>{{ task.created_at }}</td>
+            <td>
+              <a href="#">{% translate 'Изменить' %}</a>
+              <br />
+              <a href="#">{% translate 'Удалить' %}</a>
+            </td>
+          </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
